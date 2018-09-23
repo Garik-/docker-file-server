@@ -11,7 +11,7 @@ docker pull nginx:latest
 ```SH
 git clone https://github.com/Garik-/easy-file-server.git nodejs
 docker build -t garik:nodejs ./nodejs
-docker run -d --name nodejs -p 5000:5000 -v $(pwd)/web/src:/app/unpack --env-file ./nodejs/.env.example garik:nodejs
+docker run -d --name nodejs -p 5000:5000 -v $(pwd)/web/src/public:/app/unpack --env-file ./nodejs/.env.example garik:nodejs
 ```
 
 После этого мы запускаем nginx пробрасывая 80 порт на 8080 и связывая с nodejs - чтобы ссылаться на него в конфиге `http://nodejs:5000`
