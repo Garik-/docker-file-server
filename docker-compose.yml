@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api:
+    build: ./nodejs
+    restart: always
+    ports:
+    - "5000:5000"
+    volumes:
+      - ./web/src/public:/app/unpack
+      - ./web/src/uploads:/app/uploads
+    environment:
+      PORT: 5000
+      DB_FILE: '/app/db.json'
+      UPLOAD_DIR: '/app/uploads/'
+      UNPACK_DIR: '/app/unpack/'  
+  web:
+    image: nginx
+    restart: always
+    ports:
+      - "8080:80"
+    links:
+      - "api:nodejs"
+    volumes:
+      - ./web/src:/var/www
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
