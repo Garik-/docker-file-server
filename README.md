@@ -6,11 +6,12 @@
 docker pull nginx:latest
 ```
 
-Мы делаем контейнер с нашей немного модифицированной приложухой [easy-file-server](https://github.com/Garik-/easy-file-server) получается эдакий микросервис и стартуем его на 5000 порту
+Мы делаем контейнер с нашей немного модифицированной приложухой [easy-file-server](https://github.com/Garik-/easy-file-server) получается эдакий микросервис и стартуем его на 5000 порту.  env-file надо подправить на наши нужды, например если мы хотим изменить порт по умолчанию
 
 ```SH
+git clone https://github.com/Garik-/easy-file-server.git nodejs
 docker build -t garik:nodejs ./nodejs
-docker run -d --name nodejs -p 5000:5000 garik:nodejs
+docker run -d --name nodejs -p 5000:5000 -v $(pwd)/web/src:/app/unpack --env-file ./nodejs/.env.example garik:nodejs
 ```
 
 После этого мы запускаем nginx пробрасывая 80 порт на 8080 и связывая с nodejs - чтобы ссылаться на него в конфиге `http://nodejs:5000`
