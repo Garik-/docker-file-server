@@ -40,7 +40,7 @@ docker-compose up --build
 
 ## Тестируем
 ```SH
-curl -X POST -F "file=@1.zip" http://localhost:8080/api/upload
+curl -X POST -F "file=@1.zip" -F "slug=test" http://localhost:8080/api/upload
 # {"response":{"id":"5e9467649dc0d74f0ce696a69bff7069","name":"1.zip"}}
 
 curl http://localhost:8080/api/list

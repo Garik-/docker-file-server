@@ -9,6 +9,7 @@ services:
     volumes:
       - ./web/src/public:/app/unpack
       - ./web/src/uploads:/app/uploads
+      - ./config/db.json:/app/db.json
     environment:
       PORT: 5000
       DB_FILE: '/app/db.json'
